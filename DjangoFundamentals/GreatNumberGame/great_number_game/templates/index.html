@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Great Number Game</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+</head>
+<body>
+    <p class="welcome">Welcome to the Great Number Game!</p>
+    <p class="description">I am thinking of a number between 1 and 100</p>
+    <p class="description">Take a guess!</p>
+    {% if request.session.guess > request.session.rand %}
+        <div class="wrong-guess">Too high!</div>
+    {% elif request.session.guess < request.session.rand %}
+        <div class="wrong-guess">Too low!</div>
+    {% elif request.session.guess == request.session.rand %}
+        <div class="right-guess">
+            <p class="hooray">{{request.session.guess}} was the number!</p>
+            <form action="/right_guess" method="post">
+                {% csrf_token %}
+                <input class="play-button" type="submit" value="Play again!">
+            </form>
+        </div>
+    {% endif %}
+    {% if request.session.guess != request.session.rand %}
+        <form class="guess-area" action="/handle_guess" method="post">
+            {% csrf_token %}
+            <input class="guess-field" type="text" name="guess">
+            <input class="submit-button" type="submit" value="Submit">
+        </form>
+    {% endif %}
+</body>
+</html>

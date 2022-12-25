@@ -1,0 +1,7 @@
+deplo/
+exam/
+*.txt
+*.rar
+DjangoFullStack/*.rar
+DjangoFundamentals/*.rar
+DjangoORM/*.rar

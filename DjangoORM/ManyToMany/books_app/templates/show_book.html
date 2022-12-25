@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Books & Authors</title>
+</head>
+<body>
+    <h3>{{book.title}}</h3>
+    <p>ID: {{book.id}}</p>
+    <p>Description: {{book.description}}</p>
+    <p>Authors:</p>
+    <ul>
+        {% for author in book.authors.all %}
+            <li>{{author.name}}</li>
+        {% endfor %}
+    </ul>
+    <form action="/assign_author" method="post">
+        {% csrf_token %}
+        <select name="which-author">
+            <option disabled selected>- select an author -</option>
+            {% for author in authors %}
+                {% if author not in book.authors.all %}
+                    <option value="{{author.id}}">{{author.name}}</option>
+                {% endif %}
+            {% endfor %}
+        </select>
+        <input type="hidden" name="which-book" value="{{book.id}}">
+        <input type="submit" value="Add">
+    </form>
+</body>
+</html>

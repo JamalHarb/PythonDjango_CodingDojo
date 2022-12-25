@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Update</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'style.css' %}">
+</head>
+<body>
+    <div class="container">
+        <div class="page-top">
+            <p class="top">Edit Show {{show.id}}</p>
+            <p><a href="/shows">Go Back</a></p>
+        </div>
+        <form action="/shows/update" method="post">
+            {% csrf_token %}
+            <p>Title</p>
+            <p><input class="title" type="text" name="title" value="{{show.title}}"></p>
+            <div class="network-release-date">
+                <div class="network">
+                    <p>Network</p>
+                    <p><input type="text" name="network" value="{{show.network}}"></p>
+                </div>
+                <div class="release-date">
+                    <p>Release Date</p>
+                    <p><input type="date" name="release-date" value="{{show.release_date|date:'20y-m-d'}}"></p>
+                </div>
+            </div>
+            <p>Description</p>
+            <p><textarea class="desc" name="description" rows="10">{{show.description}}</textarea></p>
+
+            <input type="hidden" name="showId" value="{{show.id}}">
+            <input type="submit" value="Update">
+        </form>
+        <a href="/shows/{{show.id}}">Go to Show</a>
+        {% if messages %}
+            <ul class="messages">    
+            {% for message in messages %}    
+                <li {% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>    
+            {% endfor %}
+            </ul>
+        {% endif %}
+    </div>
+</body>
+</html>

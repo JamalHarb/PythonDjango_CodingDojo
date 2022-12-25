@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Books & Authors</title>
+</head>
+<body>
+    <div class="container">
+        <div class="add-book">
+            <p class="top">Add a Book</p>
+            <form action="/add_book" method="post">
+                {% csrf_token %}
+                <table>
+                    <tr>
+                        <td>Title</td>
+                        <td><input type="text" name="title"></td>
+                    </tr>
+                    <tr>
+                        <td>Description</td>
+                        <td><input type="text" name="desc"></td>
+                    </tr>
+                    <tr>
+                        <td></td>
+                        <td>
+                            <input type="submit" value="Add">
+                        </td>
+                    </tr>
+                </table>
+            </form>
+        </div>
+        <div class="book-table">
+            <table>
+                <thead>
+                    <td>ID</td>
+                    <td>Title</td>
+                    <td>Action</td>
+                </thead>
+                {#{% row = 1 %}#}
+                {% for book in books %}
+                    {#{% if row odd gray else white %}#}
+                    <tr>
+                        <td>{{book.id}}</td>
+                        <td>{{book.title}}</td>
+                        <td><a href="/books/{{book.id}}">View</a></td>
+                    </tr>
+                {% endfor %}
+            </table>
+        </div>
+    </div>
+</body>
+</html>

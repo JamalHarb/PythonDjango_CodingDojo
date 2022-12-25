@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Wall</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'wall_style.css' %}">
+</head>
+<body>
+    <div class="header">
+        <h1>CodingDojo Wall</h1>
+        <div class="header-functionality">
+            <p>Welcome, {{request.session.first_name}}</p>
+            <a href="/logout">Log Out</a>
+        </div>
+    </div>
+    <hr>
+    <main>
+        <div class="post-message">
+            <form class="msg" action="/wall/post_message" method="post">
+                {% csrf_token %}
+                <p class="top">Post a message</p>
+                <p><textarea name="message" rows="5"></textarea></p>
+                <input class="msg-btn" type="submit" value="Post a message">
+            </form>
+        </div>
+        {% for message in messages %}
+            <div class="content">
+                <div class="message">
+                    <div class="message-and-delete">
+                        <p class="user">{{message.user.first_name}} {{message.user.last_name}} - {{message.created_at|date:'F j, Y g:i:s a'}}</p>
+                            {% if request.session.email == message.user.email and message.created_at > before_30mins %}
+                                <form action="/wall/delete_message" method="post">
+                                    {% csrf_token %}
+                                    <input type="hidden" name="message-to-delete" value="{{message.id}}">
+                                    <input class="del-btn" type="submit" value="Delete message">
+                                </form>
+                            {% endif %}
+                    </div>
+                    <p class="message-content">{{message.message}}</p>
+                    {% for comment in message.comments.all %}
+                        <div class="comment">
+                            <p class="user">{{comment.user.first_name}} {{comment.user.last_name}} - {{comment.created_at|date:'F j, Y g:i:s a'}}</p>
+                            <p class="comment-conte">{{comment.comment}}</p>
+                        </div>
+                    {% endfor %}
+                </div>
+                <form class="cmnt" action="/wall/post_comment" method="post">
+                    {% csrf_token %}
+                    <p class="comment-top">Post a comment</p>
+                    <p><textarea name="comment" rows="5"></textarea></p>
+                    <input type="hidden" name="which-message" value="{{message.id}}">
+                    <input class="cmnt-btn" type="submit" value="Post a comment">
+                </form>
+            </div>
+        {% endfor %}
+    </main>
+</body>
+</html>

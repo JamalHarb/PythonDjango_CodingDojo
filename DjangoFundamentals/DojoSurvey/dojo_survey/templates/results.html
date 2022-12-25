@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dojo Survey Index</title>
+</head>
+<body>
+    <h3 style="text-decoration: underline;">Submitted Info</h3>
+    <table>
+        <tr>
+            <td>Name:</td>
+            <td>{{name}}</td>
+        </tr>
+        <tr>
+            <td>Dojo Location:</td>
+            <td>{{loc}}</td>
+        </tr>
+        <tr>
+            <td>Favorite Language:</td>
+            <td>{{lang}}</td>
+        </tr>
+        <tr>
+            <td>Comment:</td>
+            <td>{{comm}}</td>
+        </tr>
+    </table>
+    <form action="/" method="post"> <!-- in order to use method "post", add method "post" to route("/") -->
+        {% csrf_token %}
+        <button type="submit">Go Back</button>
+    </form>
+</body>
+</html>

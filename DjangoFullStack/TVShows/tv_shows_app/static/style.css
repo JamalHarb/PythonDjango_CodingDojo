@@ -1,0 +1,32 @@
+*{
+    margin: 0;
+    padding: 0;
+    font-family: cursive;
+}
+.container{
+    width: 90%;
+    margin: 3% auto;
+}
+.page-top{
+    display: flex;
+    justify-content: space-between;
+}
+.top{
+    font-size: 200%;
+    margin-bottom: 3%;
+}
+form p, .show-info p{
+    margin-bottom: 1%;
+}
+input.title, textarea.desc{
+    width: 30%;
+}
+.network-release-date{
+    width: 30%;
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 1%;
+}
+p.last-updated{
+    margin-top: 5%;
+}

@@ -1,0 +1,59 @@
+*{
+    margin: 0;
+    padding: 0;
+    font-family: cursive;
+}
+.container{
+    width: 90%;
+    margin: 1% auto;
+}
+header{
+    margin-bottom: 5%;
+}
+a.logout{
+    float: right;
+}
+p.welcome{
+    font-size: 150%;
+}
+main{
+    display: flex;
+
+}
+.title{
+    font-size: 120%;
+}
+.edit{
+    margin-bottom: 3%;
+}
+.full-width{
+    width: 100%;
+}
+table{
+    width: 100%;
+    /* border: 1px dotted red; */
+}
+.space{
+    vertical-align: top;
+}
+.td-special{
+    display: flex;
+    justify-content: space-between;
+}
+.update-btn, .delete-btn{
+    padding: 2% 5%;
+}
+.delete-btn{
+    background-color: red;
+    color: white;
+}
+.book-likes{
+    width: 30%;
+    margin-left: 20%;
+}
+ul{
+    margin: 3% 0 5%;
+}
+li{
+    margin-left: 20%;
+}

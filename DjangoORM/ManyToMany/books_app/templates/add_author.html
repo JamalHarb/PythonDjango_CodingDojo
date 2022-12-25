@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Books & Authors</title>
+</head>
+<body>
+    <div class="container">
+        <div class="add-author">
+            <p class="top">Add an Author</p>
+            <form action="/add_author" method="post">
+                {% csrf_token %}
+                <table>
+                    <tr>
+                        <td>First Name</td>
+                        <td><input type="text" name="first-name"></td>
+                    </tr>
+                    <tr>
+                        <td>Last Name</td>
+                        <td><input type="text" name="last-name"></td>
+                    </tr>
+                    <tr>
+                        <td>Notes</td>
+                        <td><input type="text" name="notes"></td>
+                    </tr>
+                    <tr>
+                        <td></td>
+                        <td>
+                            <input type="submit" value="Add">
+                        </td>
+                    </tr>
+                </table>
+            </form>
+        </div>
+        <div class="author-table">
+            <table>
+                <thead>
+                    <td>ID</td>
+                    <td>Name</td>
+                    <td>Action</td>
+                </thead>
+                {% for author in authors %}
+                    <tr>
+                        <td>{{author.id}}</td>
+                        <td>{{author.name}}</td>
+                        <td><a href="/authors/{{author.id}}">View</a></td>
+                    </tr>
+                {% endfor %}
+            </table>
+        </div>
+    </div>
+</body>
+</html>

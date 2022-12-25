@@ -1,0 +1,31 @@
+*{
+    padding: 0;
+    margin: 0;
+    font-family: cursive;
+}
+.container{
+    margin: 0 auto;
+    width: 80%;
+
+}
+.top{
+    font-size: 200%;
+    text-align: center;
+}
+hr{
+    border: 2px solid black;
+}
+form{
+    width: 70%;
+    margin: 0 auto;
+}
+.name, .email-age{
+    display: flex;
+    /* flex-direction: column; */
+    align-items:center;
+    justify-content: space-between;
+}
+.submit{
+    display: flex;
+    justify-content: center;
+}

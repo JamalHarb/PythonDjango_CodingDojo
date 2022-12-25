@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ninja Gold</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+
+</head>
+<body>
+    <div class="container">
+        <div class="gold-balance">
+            <p class="your-gold">Your Gold:</p>
+            <p class="balance">{{request.session.gold}}</p>
+        </div>
+        <div class="places">
+            <div class="some-place">
+                <p class="place-name">Farm</p>
+                <p class="worth">(earns 10-20 gold)</p>
+                <form action="/process_gold" method="post">
+                    {% csrf_token %}
+                    <input type="hidden", name="which_place", value="farm">
+                    <input type="submit" value="Find Gold!">
+                </form>
+            </div>
+            <div class="some-place">
+                <p class="place-name">Cave</p>
+                <p class="worth">(earns 10-20 gold)</p>
+                <form action="/process_gold" method="post">
+                    {% csrf_token %}
+                    <input type="hidden", name="which_place", value="cave">
+                    <input type="submit" value="Find Gold!">
+                </form>
+            </div>
+            <div class="some-place">
+                <p class="place-name">House</p>
+                <p class="worth">(earns 10-20 gold)</p>
+                <form action="/process_gold" method="post">
+                    {% csrf_token %}
+                    <input type="hidden", name="which_place", value="house">
+                    <input type="submit" value="Find Gold!">
+                </form>
+            </div>
+            <div class="some-place">
+                <p class="place-name">Quest</p>
+                <p class="worth">(earns/takes 0-50 gold)</p>
+                <form action="/process_gold" method="post">
+                    {% csrf_token %}
+                    <input type="hidden", name="which_place", value="quest">
+                    <input type="submit" value="Find Gold!">
+                </form>
+            </div>
+        </div>
+        <div class="activities">
+            <p>Activities:</p>
+            <div class="log">
+                {% for log in request.session.log %}
+                    {% if 'earned' in log %}
+                        <p class="earn">{{log}}</p>
+                    {% elif 'lost' in log %}
+                        <p class="lost">{{log}}</p>
+                    {% else %}
+                        <p>{{log}}</p>
+                    {% endif %}
+                {% endfor %}
+            </div>
+        </div>
+        <div class="reset">
+            <form action="/reset" method="post">
+                {% csrf_token %}
+                <input type="submit" value="Reset All">
+            </form>
+        </div>
+    </div>
+</body>
+</html>

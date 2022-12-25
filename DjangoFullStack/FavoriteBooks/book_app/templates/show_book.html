@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Favorite Books</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'show_book_style.css' %}">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <a class="logout" href="/logout">Log Out</a>
+            <p class="welcome">Welcome, {{request.session.first_name}}</p>
+            <hr>
+        </header>
+        <main>
+            {% if request.session.email == book.uploaded_by.email %}
+                <div class="edit-book">
+                    <form action="/books/modify/{{book.id}}", method="post">
+                        {% csrf_token %}
+                        <p class="edit"><input class="title full-width" type="text" name="title" value="{{book.title}}"></p>
+                        <p class="edit">Added by: {{book.uploaded_by.first_name}} {{book.uploaded_by.last_name}}</p>
+                        <p class="edit">Added on: {{book.created_at}}</p>
+                        <p class="edit">Last updated on: {{book.updated_at}}</p>
+                        <table>
+                            <tr>
+                                <td class="space">Description</td>
+                                <td class="space"><textarea class="full-width" name="desc" rows="5">{{book.desc}}</textarea></td>
+                            </tr>
+                            <tr>
+                                <td></td>
+                                <td class="td-special">
+                                    <input class="update-btn" name="which-btn" type="submit" value="Update">
+                                    <input class="delete-btn" name="which-btn" type="submit" value="Delete">
+                                </td>
+                            </tr>
+                        </table>
+                    </form>
+                </div>
+            {% else %}
+                <div class="book-info">
+                    <p class="title edit">{{book.title}}</p>
+                    <p class="edit">Added by: {{book.uploaded_by.first_name}} {{book.uploaded_by.last_name}}</p>
+                    <p class="edit">Added on: {{book.created_at}}</p>
+                    <p class="edit">Last updated on: {{book.updated_at}}</p>
+                    <p class="edit">Description: {{book.desc}}</p>
+                </div>
+            {% endif %}
+            <div class="book-likes">
+                <p class="title">Users who like this book:</p>
+                <ul>
+                {% for user in book.liked_by.all %}
+                    <li>{{user.first_name}} {{user.last_name}} {% if user == logged_user %}<a href="/books/{{book.id}}/unfavorite">Un-Favorite</a>{% endif %}</li>
+                {% endfor %}
+                </ul>
+                {% if book not in logged_user.liked_books.all %}
+                    <a href="/books/add_favorite/{{book.id}}">Add to Favorites</a>
+                {% endif %}
+            </div>
+        </main>
+        {% if messages %}
+            <ul class="messages">    
+            {% for message in messages %}    
+                <li {% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>    
+            {% endfor %}
+            </ul>
+        {% endif %}
+    </div>
+</body>
+</html>

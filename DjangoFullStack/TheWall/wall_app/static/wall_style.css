@@ -1,0 +1,85 @@
+*{
+    margin: 0;
+    padding: 0;
+    font-family: cursive;
+}
+.header{
+    width: 97%;
+    margin: 0.5% auto;
+    display: flex;
+    justify-content: space-between;
+}
+.header-functionality{
+    width: 20%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+hr{
+    border: 2px solid black;
+}
+.top{
+    font-size: 200%;
+}
+main{
+    width: 70%;
+    margin: 5% auto;
+}
+.post-message{
+    margin-bottom: 5%;
+}
+form.msg{
+    display: flex;
+    flex-direction: column;
+}
+.content{
+    margin-bottom: 5%;
+}
+textarea{
+    width: 100%;
+    border: 2px solid black;
+}
+.message{
+    margin-bottom: 5%;
+}
+.message-and-delete{
+    display: flex;
+    align-items: center;
+    /* border: 1px dotted red; */
+}
+.del-btn{
+    background-color: red;
+    color: white;
+    padding: 3% 5%;
+    margin-left: 50%;
+}
+.user{
+    font-weight: bold;
+    margin: 0 0 1% 0;
+}
+.message-content{
+    margin: 0 0 2% 2%;
+}
+.comment{
+    margin: 0 0 2% 4%;
+}
+.comment-top{
+    font-size: 110%;
+}
+.msg-btn{
+    background-color: blue;
+    color: white;
+    padding: 0.5% 1%;
+    align-self: flex-end;
+}
+form.cmnt{
+    margin-left: 4%;
+    display: flex;
+    flex-direction: column;
+}
+.cmnt-btn{
+    background-color: green;
+    color: white;
+    padding: 0.5% 1%;
+    align-self: flex-end;
+}
